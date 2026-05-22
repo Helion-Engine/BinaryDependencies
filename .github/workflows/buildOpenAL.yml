@@ -13,6 +13,7 @@ jobs:
         include:
           - os: ubuntu-22.04
             rid: linux-x64
+            cmakepath: cmake
             prereqs: |
               sudo apt install ca-certificates curl gpg
               curl -fsSL https://apt.kitware.com/keys/kitware-archive-latest.asc | sudo gpg --dearmor --yes -o /usr/share/keyrings/kitware-archive-keyring.gpg
@@ -31,7 +32,10 @@ jobs:
             libfiles: openal-soft/build/libopenal.so
           - os: windows-2022
             rid: win-x64
-            prereqs: echo "Hi there."
+            cmakepath: ../cmake/cmake-4.3.2-windows-x86_64/bin/cmake
+            prereqs: |
+              curl -fsSL https://github.com/Kitware/CMake/releases/download/v4.3.2/cmake-4.3.2-windows-x86_64.zip > cmake.zip
+              unzip cmake.zip -x cmake-4.3.2-windows-x86_64/doc/* cmake-4.3.2-windows-x86_64/share/cmake-4.3/Help/* -d cmake
             cmakeargs: -B build -A x64 -DALSOFT_BACKEND_JACK:BOOL="0" -DALSOFT_INSTALL_CONFIG:BOOL="0" -DALSOFT_ENABLE_MODULES:BOOL="1" -DALSOFT_BACKEND_COREAUDIO:BOOL="0" -DALSOFT_BACKEND_PIPEWIRE:BOOL="0" -DALSOFT_BACKEND_WINMM:BOOL="0" -DALSOFT_BACKEND_DSOUND:BOOL="1" -DALSOFT_BACKEND_OPENSL:BOOL="0" -DALSOFT_BACKEND_PORTAUDIO:BOOL="0" -DALSOFT_UTILS:BOOL="0" -DALSOFT_INSTALL_EXAMPLES:BOOL="0" -DALSOFT_INSTALL_UTILS:BOOL="0" -DALSOFT_BACKEND_PULSEAUDIO:BOOL="0" -DALSOFT_BACKEND_WAVE:BOOL="0" -DALSOFT_EXAMPLES:BOOL="0" -DALSOFT_BACKEND_OBOE:BOOL="0" -DALSOFT_BACKEND_WASAPI:BOOL="1" 
             linkerfiles: openal-soft/build/Release/OpenAL32.lib
             libfiles: openal-soft/build/Release/OpenAL32.dll
@@ -42,20 +46,21 @@ jobs:
         run: git submodule update --init
       - name: Install Tools
         run: ${{ matrix.prereqs }}
+        shell: bash
       - name: Print CMake version
-        run: cmake --version
+        run: ${{ matrix.cmakepath }} --version
       - name: CMake Configure Shared
-        run: cmake ${{ matrix.cmakeargs }}
+        run: ${{ matrix.cmakepath }} ${{ matrix.cmakeargs }}
         working-directory: openal-soft
       - name: CMake Build Shared
-        run: cmake --build . --config Release -j
-        working-directory: openal-soft/build
+        run: ${{ matrix.cmakepath }} --build build --config Release -j
+        working-directory: openal-soft
       - name: CMake Configure Static
-        run: cmake ${{ matrix.cmakeargs }} -DLIBTYPE=STATIC
+        run: ${{ matrix.cmakepath }} ${{ matrix.cmakeargs }} -DLIBTYPE=STATIC
         working-directory: openal-soft
       - name: CMake Build Static
-        run: cmake --build . --config Release -j
-        working-directory: openal-soft/build
+        run: ${{ matrix.cmakepath }} --build build --config Release -j
+        working-directory: openal-soft
       - name: Make Output Folder
         run: |
          mkdir -p build_native/${{ matrix.rid }}
