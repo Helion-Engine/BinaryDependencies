@@ -60,3 +60,30 @@ jobs:
         with:
           name: native-${{ matrix.rid }}
           path: build_native
+  pack:
+    runs-on: ubuntu-22.04
+    needs: build_native
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get Native Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: native-*
+          path: glfw-native
+          merge-multiple: true
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - name: pack
+        run: dotnet pack -c Release
+        working-directory: csharp/Helion.GLFW
+      - name: Make Output Folder
+        run: |
+          mkdir -p build_managed
+          cp csharp/Helion.GLFW/bin/Release/*.nupkg build_managed
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Helion.Helion.GLFW
+          path: build_managed
