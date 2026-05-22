@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.Build.NoTargets">
     <PropertyGroup>
         <PackageId>Helion.OpenALSoft</PackageId>
         <PackageVersion>1.25.2</PackageVersion>
         <Authors>Helion Dev Team</Authors>
         <RepositoryUrl>https://github.com/Helion-Engine/BinaryDependencies</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>netcoreapp1.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
