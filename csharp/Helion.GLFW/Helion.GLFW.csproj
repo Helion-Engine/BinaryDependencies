@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <PackageId>Helion.SDLControllerWrapper</PackageId>
+        <PackageVersion>3.4.0</PackageVersion>
+        <Authors>Helion Dev Team</Authors>
+        <RepositoryUrl>https://github.com/Helion-Engine/BinaryDependencies</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <TargetFramework>net10.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\glfw-native\linux-x64\*" Pack="true" PackagePath="runtimes\linux-x64\native" />
+        <None Include="..\..\glfw-native\win-x64\*" Pack="true" PackagePath="runtimes\win-x64\native" />
+    </ItemGroup>
+</Project>

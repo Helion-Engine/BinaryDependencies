@@ -1,0 +1,1 @@
+This package exists solely to repackage built (both shared .dll/.so and static .lib/.a) versions of the GLFW software from github.com/glfw/glfw.
