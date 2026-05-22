@@ -85,5 +85,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Helion.Helion.GLFW
+          name: Helion.GLFW
           path: build_managed
