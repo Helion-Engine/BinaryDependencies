@@ -15,8 +15,8 @@ jobs:
             rid: linux-x64
             prereqs: |
               sudo apt-get install -y cmake libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libwayland-dev libxkbcommon-dev
-              echo "GLFWAPI void* glfwGetWin32Window(GLFWwindow* window);" >> src/glfw3native.h
-              cat >> src/window.c<< EOF
+              echo "GLFWAPI void* glfwGetWin32Window(GLFWwindow* window);" >> glfw/src/glfw3native.h
+              cat >> glfw/src/window.c<< EOF
               GLFWAPI void* glfwGetWin32Window(GLFWwindow* handle)
               {
                   return NULL;
