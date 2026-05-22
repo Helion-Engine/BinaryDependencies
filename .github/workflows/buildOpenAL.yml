@@ -49,29 +49,23 @@ jobs:
         shell: bash
       - name: Print CMake version
         run: ${{ matrix.cmakepath }} --version
-        working-directory: openal-soft
-        shell: bash
       - name: CMake Configure Shared
         run: ${{ matrix.cmakepath }} ${{ matrix.cmakeargs }}
         working-directory: openal-soft
-        shell: bash
       - name: CMake Build Shared
         run: ${{ matrix.cmakepath }} --build build --config Release -j
         working-directory: openal-soft
       - name: CMake Configure Static
         run: ${{ matrix.cmakepath }} ${{ matrix.cmakeargs }} -DLIBTYPE=STATIC
         working-directory: openal-soft
-        shell: bash
       - name: CMake Build Static
         run: ${{ matrix.cmakepath }} --build build --config Release -j
         working-directory: openal-soft
-        shell: bash
       - name: Make Output Folder
         run: |
          mkdir -p build_native/${{ matrix.rid }}
          cp ${{ matrix.linkerfiles }} build_native/${{ matrix.rid }}
          cp ${{ matrix.libfiles }} build_native/${{ matrix.rid }}
-        shell: bash
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
