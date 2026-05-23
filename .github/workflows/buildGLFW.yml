@@ -22,7 +22,7 @@ jobs:
                   return NULL;
               }
               EOF
-            cmakeargsdynamic: -B build
+            cmakeargsdynamic: -B build -DBUILD_SHARED_LIBS=ON
             cmakeargsstatic: -B build -DBUILD_SHARED_LIBS=OFF -DLIBTYPE=STATIC -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE
             cmakeargscommon: -DGLFW_BUILD_DOCS:BOOL="0" -DGLFW_BUILD_TESTS:BOOL="0" -DGLFW_BUILD_EXAMPLES:BOOL="0" 
             linkerfiles: glfw/build/src/libglfw3.a
@@ -30,7 +30,7 @@ jobs:
           - os: windows-2022
             rid: win-x64
             prereqs: echo "Hi there."
-            cmakeargsdynamic: -B build -A x64
+            cmakeargsdynamic: -B build -A x64 -DBUILD_SHARED_LIBS=ON
             cmakeargsstatic: -B build -A x64 -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded -DBUILD_SHARED_LIBS=OFF -DLIBTYPE=STATIC -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE
             cmakeargscommon: -DGLFW_BUILD_DOCS:BOOL="0" -DGLFW_BUILD_TESTS:BOOL="0" -DGLFW_BUILD_EXAMPLES:BOOL="0" 
             linkerfiles: glfw/build/src/Release/glfw3.lib
