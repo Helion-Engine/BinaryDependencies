@@ -22,15 +22,17 @@ jobs:
                   return NULL;
               }
               EOF
-            cmakeargs: -B build
+            cmakeargsdynamic: -B build
             cmakeargsstatic: -B build -DBUILD_SHARED_LIBS=OFF -DLIBTYPE=STATIC -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE
+            cmakeargscommon: -DGLFW_BUILD_DOCS:BOOL="0" -DGLFW_BUILD_TESTS:BOOL="0" -DGLFW_BUILD_EXAMPLES:BOOL="0" 
             linkerfiles: glfw/build/src/libglfw3.a
             libfiles: glfw/build/src/libglfw.so
           - os: windows-2022
             rid: win-x64
             prereqs: echo "Hi there."
-            cmakeargs: -B build -A x64
+            cmakeargsdynamic: -B build -A x64
             cmakeargsstatic: -B build -A x64 -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded -DBUILD_SHARED_LIBS=OFF -DLIBTYPE=STATIC -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE
+            cmakeargscommon: -DGLFW_BUILD_DOCS:BOOL="0" -DGLFW_BUILD_TESTS:BOOL="0" -DGLFW_BUILD_EXAMPLES:BOOL="0" 
             linkerfiles: glfw/build/src/Release/glfw3.lib
             libfiles: glfw/build/src/Release/glfw3.dll
     runs-on: ${{ matrix.os }}
@@ -41,13 +43,13 @@ jobs:
       - name: Install Tools
         run: ${{ matrix.prereqs }}
       - name: CMake Configure Shared
-        run: cmake ${{ matrix.cmakeargs }} -DGLFW_BUILD_DOCS:BOOL="0" -DBUILD_SHARED_LIBS:BOOL="1" -DGLFW_BUILD_TESTS:BOOL="0" -DGLFW_BUILD_EXAMPLES:BOOL="0" 
+        run: cmake ${{ matrix.cmakeargsdynamic }} ${{ matrix.cmakeargscommon }}
         working-directory: glfw
       - name: CMake Build Shared
         run: cmake --build . --config Release -j
         working-directory: glfw/build
       - name: CMake Configure Static
-        run: cmake ${{ matrix.cmakeargsstatic }} -DGLFW_BUILD_DOCS:BOOL="0" -DGLFW_BUILD_TESTS:BOOL="0" -DGLFW_BUILD_EXAMPLES:BOOL="0" 
+        run: cmake ${{ matrix.cmakeargsstatic }} ${{ matrix.cmakeargscommon }}
         working-directory: glfw
       - name: CMake Build Static
         run: cmake --build . --config Release -j
