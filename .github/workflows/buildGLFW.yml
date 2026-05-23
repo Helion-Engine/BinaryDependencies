@@ -28,7 +28,7 @@ jobs:
           - os: windows-2022
             rid: win-x64
             prereqs: echo "Hi there."
-            cmakeargs: -B build -A x64
+            cmakeargs: -B build -A x64 DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
             linkerfiles: glfw/build/src/Release/glfw3.lib
             libfiles: glfw/build/src/Release/glfw3.dll
     runs-on: ${{ matrix.os }}
