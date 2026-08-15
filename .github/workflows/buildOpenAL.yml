@@ -44,8 +44,8 @@ jobs:
             cmakeargsdynamic:
             cmakeargsstatic: -DBUILD_SHARED_LIBS=OFF -DLIBTYPE=STATIC -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE
             cmakeargscommon: -B build -DALSOFT_REQUIRE_COREAUDIO=ON -DALSOFT_EXAMPLES=OFF
-            linkerfiles: openal-soft/build/Release/OpenAL32.lib
-            libfiles: openal-soft/build/Release/OpenAL32.dll
+            linkerfiles: openal-soft/build/libopenal.a
+            libfiles: openal-soft/build/libopenal.dylib
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
