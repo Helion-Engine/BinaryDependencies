@@ -38,7 +38,7 @@ jobs:
             cmakeargscommon: -B build -A x64 -DALSOFT_TESTS=ON -DALSOFT_BUILD_ROUTER=ON -DALSOFT_REQUIRE_WINMM=ON -DALSOFT_REQUIRE_DSOUND=ON -DALSOFT_REQUIRE_WASAPI=ON DALSOFT_TESTS=OFF -DALSOFT_EXAMPLES=OFF
             linkerfiles: openal-soft/build/Release/OpenAL32.lib
             libfiles: openal-soft/build/Release/OpenAL32.dll
-          - os: macos-latest
+          - os: macos-15-arm64
             rid: osx-arm64
             prereqs: echo "Hi there."
             cmakeargsdynamic:
