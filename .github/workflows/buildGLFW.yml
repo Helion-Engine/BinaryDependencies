@@ -37,7 +37,14 @@ jobs:
             libfiles: glfw/build/src/Release/glfw3.dll
           - os: macos-latest
             rid: osx-arm64
-            prereqs: echo "Hi again."
+            prereqs: |
+              echo "GLFWAPI void* glfwGetWin32Window(GLFWwindow* window);" >> glfw/src/glfw3native.h
+              cat >> glfw/src/window.c<< EOF
+              GLFWAPI void* glfwGetWin32Window(GLFWwindow* handle)
+              {
+                  return NULL;
+              }
+              EOF
             cmakeargsdynamic: -DBUILD_SHARED_LIBS=ON
             cmakeargsstatic: -DBUILD_SHARED_LIBS=OFF -DLIBTYPE=STATIC -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE
             cmakeargscommon: -B build -DGLFW_BUILD_DOCS:BOOL="0" -DGLFW_BUILD_TESTS:BOOL="0" -DGLFW_BUILD_EXAMPLES:BOOL="0"
