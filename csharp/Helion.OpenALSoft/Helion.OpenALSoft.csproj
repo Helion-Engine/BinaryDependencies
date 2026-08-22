@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.Build.NoTargets">
     <PropertyGroup>
         <PackageId>Helion.OpenALSoft</PackageId>
-        <PackageVersion>1.25.2.1</PackageVersion>
+        <PackageVersion>1.25.2.2</PackageVersion>
         <Authors>Helion Dev Team</Authors>
         <RepositoryUrl>https://github.com/Helion-Engine/BinaryDependencies</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
