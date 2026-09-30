@@ -30,12 +30,12 @@ jobs:
             cmakeargscommon: -B build -DCMAKE_CXX_COMPILER=g++-12 -DCMAKE_C_COMPILER=gcc-12 -DALSOFT_REQUIRE_RTKIT=ON -DALSOFT_REQUIRE_ALSA=ON -DALSOFT_REQUIRE_OSS=ON -DALSOFT_REQUIRE_PORTAUDIO=ON -DALSOFT_REQUIRE_PULSEAUDIO=ON -DALSOFT_REQUIRE_JACK=ON -DALSOFT_REQUIRE_PIPEWIRE=ON -DALSOFT_TESTS=OFF -DALSOFT_EXAMPLES=OFF
             linkerfiles: openal-soft/build/libopenal.a
             libfiles: openal-soft/build/libopenal.so.1
-          - os: windows-2022
+          - os: windows-2025-vs2026
             rid: win-x64
             prereqs: echo "Hi there."
             cmakeargsdynamic:
             cmakeargsstatic: -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded -DBUILD_SHARED_LIBS=OFF -DLIBTYPE=STATIC
-            cmakeargscommon: -B build -A x64 -DCMAKE_CXX_FLAGS=/std:c++20 -DALSOFT_TESTS=OFF -DALSOFT_BUILD_ROUTER=ON -DALSOFT_REQUIRE_WINMM=ON -DALSOFT_REQUIRE_DSOUND=ON -DALSOFT_REQUIRE_WASAPI=ON
+            cmakeargscommon: -B build -A x64 -DALSOFT_TESTS=OFF -DALSOFT_BUILD_ROUTER=ON -DALSOFT_REQUIRE_WINMM=ON -DALSOFT_REQUIRE_DSOUND=ON -DALSOFT_REQUIRE_WASAPI=ON
             linkerfiles: openal-soft/build/Release/OpenAL32.lib
             libfiles: openal-soft/build/Release/OpenAL32.dll
           - os: macos-15
