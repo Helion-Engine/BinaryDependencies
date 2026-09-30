@@ -35,7 +35,7 @@ jobs:
             cmakeargscommon: -B build -A x64 -DGLFW_BUILD_DOCS:BOOL="0" -DGLFW_BUILD_TESTS:BOOL="0" -DGLFW_BUILD_EXAMPLES:BOOL="0"
             linkerfiles: glfw/build/src/Release/glfw3.lib
             libfiles: glfw/build/src/Release/glfw3.dll
-          - os: macos-latest
+          - os: macos-15
             rid: osx-arm64
             prereqs: |
               echo "GLFWAPI void* glfwGetWin32Window(GLFWwindow* window);" >> glfw/src/glfw3native.h

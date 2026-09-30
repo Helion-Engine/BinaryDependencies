@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.Build.NoTargets">
     <PropertyGroup>
         <PackageId>Helion.GLFW</PackageId>
-        <PackageVersion>3.4.0.1</PackageVersion>
+        <PackageVersion>3.4.0.2</PackageVersion>
         <Authors>Helion Dev Team</Authors>
         <RepositoryUrl>https://github.com/Helion-Engine/BinaryDependencies</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
